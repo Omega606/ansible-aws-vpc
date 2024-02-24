@@ -60,7 +60,7 @@
         vpc_id: "{{ vpcout.vpc.id }}"
         region: "{{ region }}"
         az: "{{ zone1 }}"
-        state: "{{state}}"
+        state: "{{ state }}"
         cidr: "{{ PrivSub1Cidr }}"
         resource_tags:
           Name: vprofile_privsub1
@@ -71,7 +71,7 @@
         vpc_id: "{{ vpcout.vpc.id }}"
         region: "{{ region }}"
         az: "{{ zone2 }}"
-        state: "{{state}}"
+        state: "{{ state }}"
         cidr: "{{ PrivSub2Cidr }}"
         resource_tags:
           Name: vprofile_privsub2
@@ -82,8 +82,17 @@
         vpc_id: "{{ vpcout.vpc.id }}"
         region: "{{ region }}"
         az: "{{ zone3 }}"
-        state: "{{state}}"
+        state: "{{ state }}"
         cidr: "{{ PrivSub3Cidr }}"
         resource_tags:
           Name: vprofile_privsub3
       register: privsub3_out
+
+    - name: Internet Gateway Setup
+      ec2_vpc_igw:
+        vpc_id: "{{ vpcout.vpc.id }}"
+        region: "{{ region }}"
+        state: "{{ state }}"
+        resource_tags:
+          Name: vprofile_IGW
+      register: igw_out

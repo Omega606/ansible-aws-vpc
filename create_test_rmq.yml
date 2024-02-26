@@ -30,6 +30,6 @@
           Name: "test_rmq"
           Project: Vprofile
           Owner: DevOps Team
-        group_id: "{{ vproStackSG_out.group_id }}"
+        group_id: sg-0b831c278174e76a7
         vpc_subnet_id: "{{ privsub1id }}"
       register: test_rmq01_out

@@ -1,0 +1,26 @@
+---
+- name: Setup test ec2 instance
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: create test rmq ec2 instance
+      ec2:
+        key_name: vprokey
+        region: "{{ region }}"
+        instance_type: t2.micro
+        image: "{{ rmq_ami }}"
+        wait: yes
+        wait_timeout: 300
+        instance_tags:
+          Name: "test_rmq"
+          Project: Vprofile
+          Owner: DevOps Team
+        exact_count: 1
+        count_tag:
+          Name: "test_rmq"
+          Project: Vprofile
+          Owner: DevOps Team
+        group_id: "{{ vproStackSG_out.group_id }}"
+        vpc_subnet_id: "{{ privsub1id }}"
+      register: test_rmq01_out
